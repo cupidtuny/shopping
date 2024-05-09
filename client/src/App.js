@@ -16,7 +16,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(serverUrl);
+    // console.log(serverUrl);
     axios
       .post(`${serverUrl}/user/getToken`)
       .then(({ data }) => dispatch(userExists(data)))
