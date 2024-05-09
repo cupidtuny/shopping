@@ -21,18 +21,20 @@ export default () => {
         ) {
             toastr.error("Enter all info", "error");
             return;
+        } else if (data.password !== data.confirmPassword) {
+            toastr.error("Wrong two password", "error");
         } else {
             try {
-                const respose = await api('/signup', {
+                const respose = await api.post('/signup', {
                     email: data.username,
                     password: data.password,
                 });
-                
+
                 if (respose.status === 200) {
-                    toastr.success("Success");
+                    toastr.success(respose.data);
                     navigate("/login");
                 } else {
-                    toastr.error("Can't connect to server");
+                    toastr.error(respose.data);
                 }
             } catch (err) {
                 toastr.error("Can't connect to server");
@@ -40,7 +42,7 @@ export default () => {
             return;
         }
     }
-    
+
     return (
         <>
             <div
@@ -67,7 +69,13 @@ export default () => {
                         id="outlined-basic"
                         label="E-mail"
                         variant="outlined"
-                        onChange={(e) => setData({ username: e.target.value })}
+                        onChange={(e) => setData(data => {
+                            return {
+                                ...data,
+                                username: e.target.value
+                            }
+                        }
+                        )}
                         style={{ width: "20%" }}
                     />
                 </div>
@@ -82,7 +90,13 @@ export default () => {
                         label="Password"
                         variant="outlined"
                         style={{ width: "20%" }}
-                        onChange={(e) => setData({ password: e.target.value })}
+                        onChange={(e) => setData(data => {
+                            return {
+                                ...data,
+                                password: e.target.value
+                            }
+                        }
+                        )}
                     />
                 </div>
                 <div
@@ -99,7 +113,13 @@ export default () => {
                         style={{
                             width: "20%"
                         }}
-                        onChange={(e) => setData({ confirmPassword: e.target.value })}
+                        onChange={(e) => setData(data => {
+                            return {
+                                ...data,
+                                confirmPassword: e.target.value
+                            }
+                        }
+                        )}
                     />
                 </div>
                 <div

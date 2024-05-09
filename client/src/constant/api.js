@@ -9,5 +9,5 @@ const api = axios.create({
 });
 
 api.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-
+console.log(AUTH_TOKEN);
 export default api;

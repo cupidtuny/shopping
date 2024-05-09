@@ -1,5 +1,5 @@
 import { userExists } from '../../redux/reducer/authReducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
@@ -11,9 +11,6 @@ import toastr from 'toastr';
 export default () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { dessertList } = useSelector(
-        (state) => state.dessert
-    );
 
     const [data, setData] = useState({
         username: "",
@@ -30,13 +27,14 @@ export default () => {
         } else {
             try {
                 const response = await api.post('/login', {
-                    data: data
+                    email: data.username,
+                    password: data.password
                 });
                 if (response.status === 200) {
-                    toastr.success("Success to login");
-                    localStorage.setItem("token", response.data);
-                    const token = jwtDecode(response.data);
+                    localStorage.setItem("token", `${response.data.token}`);
+                    const token = jwtDecode(response.data.token);
                     dispatch((userExists(token)));
+                    toastr.success("Success to login");
                     navigate("/");
                 } else {
                     toastr.error(response.data);
@@ -69,7 +67,12 @@ export default () => {
                         id="outlined-basic"
                         label="E-mail"
                         variant="outlined"
-                        onChange={(e) => setData({ username: e.target.value })}
+                        onChange={(e) => setData(data => {
+                            return {
+                                ...data,
+                                username: e.target.value
+                            }
+                        })}
                         style={{ width: "20%" }}
                     />
                 </div>
@@ -80,10 +83,16 @@ export default () => {
                 >
                     <TextField
                         id="outlined-basic"
+                        type="password"
                         label="Password"
                         variant="outlined"
                         style={{ width: "20%" }}
-                        onChange={(e) => setData({ password: e.target.value })}
+                        onChange={(e) => setData(data => {
+                            return {
+                                ...data,
+                                password: e.target.value
+                            }
+                        })}
                     />
                 </div>
                 <div className="flex items-center justify-center"

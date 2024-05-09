@@ -17,17 +17,27 @@ export const dessertReducer = createSlice({
             return;
         },
         dessertAdd: (state, action) => {
-            state.dessertList = [
-                ...state.dessertList,
-                ...action.payload
-            ];
-            return;
+            const newDataArray = [...state.dessertList, action.payload];
+            return {
+                ...state,
+                dessertList: newDataArray
+            };
         },
         dessertUpdate: (state, action) => {
-            state.dessertList[action.payload.index] = {
-                ...action.payload
-            };
-            return;
+            console.log(action.payload);
+            const indexToUpdate = state.dessertList.findIndex(item => item._id === action.payload._id);
+            // If the item is found
+            if (indexToUpdate !== -1) {
+              // Create a new array by spreading the existing data
+              const newDataArray = [...state.dessertList];
+              // Update the item at the found index with the new data
+              newDataArray[indexToUpdate] = { ...newDataArray[indexToUpdate], ...action.payload };
+              // Return a new state object with the updated array
+              return {
+                ...state,
+                dessertList: newDataArray
+              };
+            }
         }
     }
 })

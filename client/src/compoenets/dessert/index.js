@@ -18,7 +18,7 @@ import {
     getList,
     dessertAdd,
     dessertDelete,
-    dessertUpdate 
+    dessertUpdate
 } from '../../redux/reducer/dessertReducer';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -61,73 +61,96 @@ const CustomizedTables = (props) => {
     const [temp, setTemp] = useState({
         open: false,
         id: "",
+        state: 0
     });
 
     const [data, setData] = useState({
         dessert: "",
-        calorie: "",
-        fat: "",
-        carb: "",
-        protein: "",
+        calory: 0,
+        fat: 0,
+        carb: 0,
+        protein: 0,
     })
 
     const handleOpen = () => {
-        setTemp({ open: true });
-        setTemp({ state: 0 });
+        setTemp(data => {
+            return {
+                ...data,
+                open: true,
+                state: 0
+            }
+        })
     }
 
     const handleClose = () => {
-        setTemp({ open: false });
+        setTemp(data => {
+            return {
+                ...data,
+                open: false
+            }
+        })
+    }
+
+    const handleChange = (v) => {
+        setTemp(data => {
+            return {
+                ...data,
+                open: true,
+                state: 1,
+                id: dessertList[v]._id
+            }
+        })
     }
 
     const handleUpdate = async (v) => {
-        setTemp({ open: true });
-        if (data.dessert === ""
-            && data.calorie === ""
-            && data.fat === ""
-            && data.carb === ""
-            && data.protein === "") {
-            toastr.error("Enter all info");
-        } else if (data.dessert === "") {
-            toastr.error("Enter dessert info");
-        } else if (data.calorie === "") {
-            toastr.error("Enter calorie info");
-        } else if (data.fat === "") {
-            toastr.error("Enter fat info");
-        } else if (data.carb === "") {
-            toastr.error("Enter carb info");
-        } else if (data.protein === "") {
-            toastr.error("Enter protein info");
-        } else if (data.dessert !== ""
-            && data.calorie !== ""
-            && data.fat !== ""
-            && data.carb !== ""
-            && data.protein !== ""
-            && data.state === 0) {
-            try {
-                var dessertData = {
-                    _id: dessertList[v]._id,
+        try {
+            if (data.dessert === ""
+                && data.calory === ""
+                && data.fat === ""
+                && data.carb === ""
+                && data.protein === "") {
+                toastr.error("Enter all info");
+            } else if (data.dessert === "") {
+                toastr.error("Enter dessert info");
+            } else if (data.calory === "") {
+                toastr.error("Enter calory info");
+            } else if (data.fat === "") {
+                toastr.error("Enter fat info");
+            } else if (data.carb === "") {
+                toastr.error("Enter carb info");
+            } else if (data.protein === "") {
+                toastr.error("Enter protein info");
+            } else {
+                const dessertData = {
+                    _id: temp.id,
                     protein: data.protein,
-                    calory: data.calorie,
-                    name: data.dessert,
+                    calory: data.calory,
+                    dessert: data.dessert,
                     carb: data.carb,
                     fat: data.fat,
                     index: v,
                 }
-                const data = await api.post('/update', {
+                const response = await api.post('/update', {
                     data: dessertData
                 });
-                if (data.status === 200) {
+                if (response.status === 200) {
+                    setTemp(data => {
+                        return {
+                            ...data,
+                            open: false
+                        }
+                    })
                     toastr.success("Successed!");
                     dispatch(dessertUpdate(dessertData));
                 } else {
                     toastr.error("Failed!");
                 }
-            } catch (err) {
-                toastr.error("Can't connect to server");
             }
+        } catch (err) {
+            toastr.error("Can't connect to server");
         }
     }
+
 
     const handleDelete = async (v) => {
         try {
@@ -146,54 +169,72 @@ const CustomizedTables = (props) => {
     }
 
     const handleAdd = async () => {
-        if (data.dessert === ""
-            && data.calorie === ""
-            && data.fat === ""
-            && data.carb === ""
-            && data.protein === "") {
-            toastr.error("Enter all info");
-        } else if (data.dessert === "") {
-            toastr.error("Enter dessert info");
-        } else if (data.calorie === "") {
-            toastr.error("Enter calorie info");
-        } else if (data.fat === "") {
-            toastr.error("Enter fat info");
-        } else if (data.carb === "") {
-            toastr.error("Enter carb info");
-        } else if (data.protein === "") {
-            toastr.error("Enter protein info");
-        } else if (data.dessert !== ""
-            && data.calorie !== ""
-            && data.fat !== ""
-            && data.carb !== ""
-            && data.protein !== ""
-            && data.state === 0) {
-            try {
-                const data = await api.post('/newAdd', {
+        try {
+            if (data.dessert === ""
+                && data.calory === ""
+                && data.fat === ""
+                && data.carb === ""
+                && data.protein === "") {
+                toastr.error("Enter all info");
+            } else if (data.dessert === "") {
+                toastr.error("Enter dessert info");
+            } else if (data.calory === "") {
+                toastr.error("Enter calory info");
+            } else if (data.fat === "") {
+                toastr.error("Enter fat info");
+            } else if (data.carb === "") {
+                toastr.error("Enter carb info");
+            } else if (data.protein === "") {
+                toastr.error("Enter protein info");
+            } else {
+                const response = await api.post('/newAdd', {
                     data: data
                 });
-                if (data.status === 200) {
-                    toastr.success("Successed!");
+                setTemp(data => {
+                    return {
+                        ...data,
+                        open: false
+                    }
+                })
+                if (response.status === 200) {
+                    toastr.success(response.data);
                     dispatch(dessertAdd(data));
+                    return;
                 } else {
-                    toastr.error("Failed!");
+                    toastr.error(response.data);
+                    return;
                 }
-            } catch (err) {
-                toastr.error("Can't connect to server");
             }
+        } catch (err) {
+            console.log(err);
         }
     }
 
+    const handleTest = () => {
+        if (temp.state === 0) {
+            handleAdd();
+            return;
+        } else {
+            handleUpdate(temp.id);
+        }
+    }
     useEffect(() => {
-        api.get('/getDessert').then(({ data }) => {
-            dispatch(dessertList(data));
+        api.get('/getDessert').then((response) => {
+            if (response.status === 200) {
+                dispatch(getList(response.data));
+            } else if (response.status === 202) {
+                localStorage.removeItem("token");
+                toastr.error(response.data);
+            } else {
+                toastr.error(response.data);
+            }
         }).catch((err) => {
             toastr.error("Can't connect to server!");
         });
     }, []);
 
     return (
-        <div>
+        dessertList && <div>
             <TableContainer
                 component={Paper}
                 className='container'
@@ -218,7 +259,7 @@ const CustomizedTables = (props) => {
                     <TableHead>
                         <TableRow>
                             <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                            <StyledTableCell align="right">Calories</StyledTableCell>
+                            <StyledTableCell align="right">calorys</StyledTableCell>
                             <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
                             <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
                             <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
@@ -227,13 +268,13 @@ const CustomizedTables = (props) => {
                     </TableHead>
 
                     <TableBody>
-                        {(dessertList || []).map((row, index) => (
-                            <StyledTableRow key={row.name}>
+                        {dessertList.map((row, index) => (
+                            <StyledTableRow key={row._id}>
 
                                 <StyledTableCell component="th" scope="row">
-                                    {row.name}
+                                    {row.dessert}
                                 </StyledTableCell>
-
+                            
                                 <StyledTableCell align="right">{row.calory}</StyledTableCell>
                                 <StyledTableCell align="right">{row.fat}</StyledTableCell>
                                 <StyledTableCell align="right">{row.carb}</StyledTableCell>
@@ -242,7 +283,7 @@ const CustomizedTables = (props) => {
 
                                     <Button v
                                         ariant='text'
-                                        onClick={() => handleUpdate(index)}
+                                        onClick={() => handleChange(index)}
                                     >
                                         edit
                                     </Button>
@@ -288,23 +329,29 @@ const CustomizedTables = (props) => {
                         }}
                         value={data.dessert || undefined}
                         size='small'
-                        onChange={(e) => setData({
-                            dessert: e.target.value
+                        onChange={(e) => setData(data => {
+                            return {
+                                ...data,
+                                dessert: e.target.value
+                            }
                         })}
                     />
 
                     <TextField
+                        value={data.calory || undefined}
                         id="outlined-basic"
-                        label="Calorie"
+                        label="calory"
                         variant="outlined"
                         style={{
                             width: "100%",
                             marginTop: "20px"
                         }}
-                        value={data.calorie || undefined}
                         size='small'
-                        onChange={(e) => setData({
-                            calorie: e.target.value
+                        onChange={(e) => setData(data => {
+                            return {
+                                ...data,
+                                calory: e.target.value
+                            }
                         })}
                         type="number"
                     />
@@ -319,8 +366,11 @@ const CustomizedTables = (props) => {
                             marginTop: "20px"
                         }}
                         size='small'
-                        onChange={(e) => setData({
-                            fat: e.target.value
+                        onChange={(e) => setData(data => {
+                            return {
+                                ...data,
+                                fat: e.target.value
+                            }
                         })}
                         type="number"
                     />
@@ -335,8 +385,11 @@ const CustomizedTables = (props) => {
                             marginTop: "20px"
                         }}
                         size='small'
-                        onChange={(e) => setData({
-                            carb: e.target.value
+                        onChange={(e) => setData(data => {
+                            return {
+                                ...data,
+                                carb: e.target.value
+                            }
                         })}
                         type="number"
                     />
@@ -351,8 +404,11 @@ const CustomizedTables = (props) => {
                             marginTop: "20px"
                         }}
                         size='small'
-                        onChange={(e) => setData({
-                            protein: e.target.value
+                        onChange={(e) => setData(data => {
+                            return {
+                                ...data,
+                                protein: e.target.value
+                            }
                         })}
                         type="number"
                     />
@@ -362,7 +418,7 @@ const CustomizedTables = (props) => {
                         style={{
                             marginTop: "20px"
                         }}
-                        onClick={() => handleAdd()} >
+                        onClick={() => handleTest()} >
                         Save
                     </Button>
                 </Box>
