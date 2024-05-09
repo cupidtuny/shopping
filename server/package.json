@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "This is site for provide shpping.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cupidtuny/shopping.git"
+  },
+  "keywords": [
+    "MERN",
+    "Shopping"
+  ],
+  "author": "Tomac",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cupidtuny/shopping/issues"
+  },
+  "homepage": "https://github.com/cupidtuny/shopping#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.4"
+  }
+}
