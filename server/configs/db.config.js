@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
-// ${process.env.MONGODB_URI}/${DB_NAME}
+const mongoURI = "localhost://27017:resturant";
+
 const connectDB = async () => {
     try {
-        const connectionInstance = await mongoose.connect(
-            `mongodb://localhost:27017/resturant`,
-        );
+        const connectionInstance = await mongoose.connect(`mongodb://localhost:27017/resturant`);
         console.log(
-            `MongoDB connected !! DB HOST:${connectionInstance.connection.host}`,
+            `MongoDB connected !! DB HOST:${"mongodb://localhost:27017/shopping"}`,
         );
     } catch (error) {
-        console.log('MONGODB connection failed',error);
+        console.log('MONGODB connection failed', error);
     }
 };
 

@@ -24,13 +24,11 @@ userSchema.methods = {
 // Define hooks for pre-saving
 userSchema.pre('save', function(next) {
 	if (!this.password) {
-		console.log('=======NO PASSWORD PROVIDED=======')
 		next()
 	} else {
 		this.password = this.hashPassword(this.password)
 		next()
 	}
-	// this.password = this.hashPassword(this.password)
-	// next()
+
 })
 module.exports = mongoose.model('User', userSchema);

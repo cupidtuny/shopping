@@ -416,7 +416,8 @@ const CustomizedTables = (props) => {
                     <Button
                         variant='contained'
                         style={{
-                            marginTop: "20px"
+                            marginTop: "20px",
+                            float:"right"
                         }}
                         onClick={() => handleTest()} >
                         Save

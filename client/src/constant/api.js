@@ -1,9 +1,10 @@
 import axios from "axios";
+import serverUrl from './config';
 
 const AUTH_TOKEN = localStorage.getItem("token");
 
 const api = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: serverUrl,
     timeout: 1000,
     headers: { 'X-Custom-Header': 'foobar' }
 });

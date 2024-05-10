@@ -5,12 +5,14 @@ const express = require('express');
 const morgan = require("morgan");
 const http = require('http');
 const cors = require('cors');
+const dotenv = require('dotenv');
 //create server using express
 const app = express();
 const server = http.createServer(app);
 
 //port number
-const port = process.env.PORT || 5000;
+dotenv.config();
+const port = 5000;
 
 app.use(cors());
 

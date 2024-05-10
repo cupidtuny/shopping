@@ -1,17 +1,12 @@
 import { userExists, userNotExists } from './redux/reducer/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Routes, Route, Router, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import Login from './compoenets/auth/login';
-import { serverUrl } from "./constant/config";
 import { Suspense, lazy, useEffect } from 'react';
+import Login from './compoenets/auth/login';
+import serverUrl  from "./constant/config";
 import "toastr/build/toastr.css";
+import toastr from 'toastr';
 import axios from 'axios';
 import './App.css';
-import toastr from 'toastr';
-
-// const Home = lazy(() => import('./compoenets/home/index'));
-const SignUp = lazy(() => import("./compoenets/auth/signUp"));
-const Dessert = lazy(() => import("./compoenets/dessert/index"));
 
 function App() {
   const { user, logined } = useSelector((state) => state.auth);

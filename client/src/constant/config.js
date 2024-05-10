@@ -1,7 +1,3 @@
-// import dotenv from 'dotenv';
+const serverUrl = String(process.env.REACT_APP_SS);
 
-// dotenv.config({
-//     path:"./.env",
-// });
-
-export const serverUrl = String(process.env.VITE_SERVER_URL);
+export default serverUrl;
