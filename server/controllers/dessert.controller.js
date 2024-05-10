@@ -12,7 +12,7 @@ exports.newAdd = async (req, res) => {
             protein: protein
         });
 
-        await newDessert.save().then(result => {
+        await newDessert.save().then(() => {
             res.status(200).send("Success");
         });
 
@@ -53,7 +53,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
     try {
-        await Dessert.findByIdAndDelete({ _id: req.body._id }).then(result => {
+        await Dessert.findByIdAndDelete({ _id: req.body._id }).then(() => {
             res.status(200).send("Deleted the item!");
         })
     } catch (err) {

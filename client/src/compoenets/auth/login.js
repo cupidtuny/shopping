@@ -8,7 +8,7 @@ import { jwtDecode } from 'jwt-decode';
 import api from '../../constant/api';
 import toastr from 'toastr';
 
-export default () => {
+const  App = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -20,10 +20,6 @@ export default () => {
     const handleLogin = async () => {
         if (data.username === "" || data.password === "") {
             toastr.error("Enter all info", "error");
-        } else if (data.username === "") {
-            toastr.error("Enter E-mail", "Error");
-        } else if (data.password === "") {
-            toastr.error("Enter password", "error");
         } else {
             try {
                 const response = await api.post('/login', {
@@ -129,3 +125,5 @@ export default () => {
         </>
     )
 }
+
+export default App;

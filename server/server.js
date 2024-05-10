@@ -33,7 +33,7 @@ app.use(morgan("dev"));
 
 require('./routes/index.route')(app);
 
-app.all("*", (req, res, next) => {
+app.all("*", (req, res) => {
     res.status(404).json({
         message: "Not found",
     });

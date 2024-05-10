@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import api from "../../constant/api";
 import toastr from 'toastr';
 
-export default () => {
+const App = () => {
     const navigate = useNavigate();
 
     const [data, setData] = useState({
@@ -159,3 +159,5 @@ export default () => {
         </>
     )
 }
+
+export default App;

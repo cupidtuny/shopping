@@ -52,7 +52,7 @@ const style = {
     p: 4,
 };
 
-const CustomizedTables = (props) => {
+const CustomizedTables = () => {
     const dispatch = useDispatch();
     const { dessertList } = useSelector(
         (state) => state.dessert
@@ -228,7 +228,7 @@ const CustomizedTables = (props) => {
             } else {
                 toastr.error(response.data);
             }
-        }).catch((err) => {
+        }).catch(() => {
             toastr.error("Can't connect to server!");
         });
     }, []);
@@ -274,7 +274,7 @@ const CustomizedTables = (props) => {
                                 <StyledTableCell component="th" scope="row">
                                     {row.dessert}
                                 </StyledTableCell>
-                            
+
                                 <StyledTableCell align="right">{row.calory}</StyledTableCell>
                                 <StyledTableCell align="right">{row.fat}</StyledTableCell>
                                 <StyledTableCell align="right">{row.carb}</StyledTableCell>
@@ -417,7 +417,7 @@ const CustomizedTables = (props) => {
                         variant='contained'
                         style={{
                             marginTop: "20px",
-                            float:"right"
+                            float: "right"
                         }}
                         onClick={() => handleTest()} >
                         Save

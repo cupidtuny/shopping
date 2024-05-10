@@ -1,15 +1,14 @@
 import { userExists, userNotExists } from './redux/reducer/authReducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { Suspense, lazy, useEffect } from 'react';
-import Login from './compoenets/auth/login';
-import serverUrl  from "./constant/config";
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import serverUrl from "./constant/config";
 import "toastr/build/toastr.css";
 import toastr from 'toastr';
+import React from 'react';
 import axios from 'axios';
 import './App.css';
 
 function App() {
-  const { user, logined } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,13 +26,12 @@ function App() {
           toastr.error(response.data);
         }
       })
-      .catch((err) => dispatch(userNotExists()));
+      .catch(() => dispatch(userNotExists()));
   }, [dispatch]);
 
-  return logined ? (
-    <Login />
-  ) : (
+  return (
     <>
+      <div></div>
     </>
   )
 }

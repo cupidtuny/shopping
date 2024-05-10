@@ -48,12 +48,12 @@ exports.signUp = async (req, res) => {
                     email: email,
                     password: password,
                 })
-                user.save().then(result => {
+                user.save().then(() => {
                     res.status(200).send("Success");
                 })
             }
         })
-    } catch {
+    } catch (err){
         console.log(err);
         res.status(400).send({ message: "Error connecting to server" });
     }
