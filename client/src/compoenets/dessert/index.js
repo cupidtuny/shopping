@@ -52,7 +52,7 @@ const style = {
     p: 4,
 };
 
-const CustomizedTables = () => {
+const Dessert = () => {
     const dispatch = useDispatch();
     const { dessertList } = useSelector(
         (state) => state.dessert
@@ -143,7 +143,7 @@ const CustomizedTables = () => {
                     toastr.success("Successed!");
                     dispatch(dessertUpdate(dessertData));
                 } else {
-                    toastr.error("Failed!");
+                    toastr.error(response.data.message);
                 }
             }
         } catch (err) {
@@ -190,6 +190,7 @@ const CustomizedTables = () => {
                 const response = await api.post('/newAdd', {
                     data: data
                 });
+                console.log(response);
                 setTemp(data => {
                     return {
                         ...data,
@@ -197,11 +198,11 @@ const CustomizedTables = () => {
                     }
                 })
                 if (response.status === 200) {
-                    toastr.success(response.data);
+                    toastr.success(response.data.message);
                     dispatch(dessertAdd(data));
                     return;
                 } else {
-                    toastr.error(response.data);
+                    toastr.error(response.data.message);
                     return;
                 }
             }
@@ -428,4 +429,4 @@ const CustomizedTables = () => {
     );
 }
 
-export default CustomizedTables;
+export default Dessert;

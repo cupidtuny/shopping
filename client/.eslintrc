@@ -1,5 +1,5 @@
 {
-  "extends": [" wesbos"],
+  "extends": ["wesbos"],
   "globals": {
     "process": "readonly",
   },
@@ -8,6 +8,7 @@
   },
   "rules": {
     "no-debugger": 0,
+    "no-console": 2,
     "no-use-before-define": "off",
     "import/no-cycle": "off",
     "no-alert": 0,
@@ -50,7 +51,6 @@
         "props": false,
       },
     ],
-    "no-console": 0,
     "import/prefer-default-export": 0,
     "import": 0,
     "func-names": 0,
@@ -102,6 +102,7 @@
       {
         "singleQuote": true,
         "endOfLine": "auto",
+        "tabWidth": 4,
       },
     ],
     "jsx-a11y/href-no-hash": "off",

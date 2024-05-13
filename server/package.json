@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
     "dev": "nodemon server",
-    "lint":"eslint .",
-    "lint:fix":"eslint --fix",
-    "format":"prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettier"
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier . --write",
+    "prettier": "prettier . --check"
   },
   "repository": {
     "type": "git",
