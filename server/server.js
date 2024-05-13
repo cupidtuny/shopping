@@ -1,11 +1,13 @@
-const connectDB = require('./configs/db.config');
-const methodOverride = require('method-override');
-const bodyParser = require('body-parser');
-const express = require('express');
-const morgan = require('morgan');
-const http = require('http');
-const cors = require('cors');
-const dotenv = require('dotenv');
+/* global process*/
+import connectDB from './configs/db.config.js';
+import methodOverride from 'method-override';
+import bodyParser from 'body-parser';
+import express from 'express';
+import morgan from 'morgan';
+import http from 'http';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import Routers from './routes/index.route.js';
 //create server using express
 const app = express();
 const server = http.createServer(app);
@@ -14,7 +16,7 @@ const server = http.createServer(app);
 dotenv.config();
 
 // console.log(process.env.PORT)
-const port = process.env.PORT; // process.env.PORT;
+const port = String(process.env.PORT); // process.env.PORT;
 
 app.use(cors());
 
@@ -33,17 +35,17 @@ app.use(morgan('dev'));
 
 //Route use
 
-require('./routes/index.route')(app);
+Routers(app);
 
 app.all('*', (req, res) => {
-  res.status(404).json({
-    message: 'Not found'
-  });
+    res.status(404).json({
+        message: 'Not found'
+    });
 });
 
 //start server
 connectDB().then(() => {
-  server.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
+    server.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+    });
 });

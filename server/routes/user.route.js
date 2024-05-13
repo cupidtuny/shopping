@@ -1,7 +1,9 @@
-const userCtr = require('../controllers/user.controller');
+import userCtr from '../controllers/user.controller.js';
 
-module.exports = (app) => {
-  app.post('/login', userCtr.login);
-  app.post('/signup', userCtr.signUp);
-  app.post('/refresh', userCtr.refresh);
+const UserRouter = (app) => {
+    app.post('/login', userCtr.login);
+    app.post('/signup', userCtr.signUp);
+    app.post('/refresh', userCtr.refresh);
 };
+
+export default UserRouter;

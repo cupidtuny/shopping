@@ -14,20 +14,20 @@ const Dessert = lazy(() => import('./compoenets/dessert/index'));
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Suspense fallback={<h1>Loading...</h1>}>
-          <Routes>
-            <Route path="/" element={<Dessert />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signUp" element={<SignUp />} />
-            <Route path="/dessert" element={<Dessert />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
+    <React.StrictMode>
+        <Provider store={store}>
+            <BrowserRouter>
+                <Suspense fallback={<h1>Loading...</h1>}>
+                    <Routes>
+                        <Route path="/" element={<Dessert />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signUp" element={<SignUp />} />
+                        <Route path="/dessert" element={<Dessert />} />
+                    </Routes>
+                </Suspense>
+            </BrowserRouter>
+        </Provider>
+    </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

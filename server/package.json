@@ -1,50 +1,52 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "This is site for provide shpping.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server",
-    "dev": "nodemon server",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix",
-    "format": "prettier . --write",
-    "prettier": "prettier . --check"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cupidtuny/shopping.git"
-  },
-  "keywords": [
-    "MERN",
-    "Shopping"
-  ],
-  "author": "Tomac",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cupidtuny/shopping/issues"
-  },
-  "homepage": "https://github.com/cupidtuny/shopping#readme",
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.2",
-    "method-override": "^3.0.0",
-    "mongoose": "^8.3.4",
-    "morgan": "^1.10.0",
-    "nodemon": "^3.1.0",
-    "prettier-eslint": "^16.3.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.2.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-react": "^7.34.1",
-    "globals": "^15.2.0",
-    "prettier": "^3.2.5"
-  }
+    "name": "server",
+    "version": "1.0.0",
+    "description": "This is site for provide shpping.",
+    "type": "module",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server",
+        "dev": "nodemon server",
+        "lint": "eslint .",
+        "lint:fix": "eslint --fix",
+        "format": "prettier . --write",
+        "prettier": "prettier . --check"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cupidtuny/shopping.git"
+    },
+    "keywords": [
+        "MERN",
+        "Shopping"
+    ],
+    "author": "Tomac",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/cupidtuny/shopping/issues"
+    },
+    "homepage": "https://github.com/cupidtuny/shopping#readme",
+    "dependencies": {
+        "bcrypt": "^5.1.1",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "esm": "^3.2.25",
+        "express": "^4.19.2",
+        "jsonwebtoken": "^9.0.2",
+        "method-override": "^3.0.0",
+        "mongoose": "^8.3.4",
+        "morgan": "^1.10.0",
+        "nodemon": "^3.1.0",
+        "prettier-eslint": "^16.3.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.2.0",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.1.3",
+        "eslint-plugin-react": "^7.34.1",
+        "globals": "^15.2.0",
+        "prettier": "^3.2.5"
+    }
 }

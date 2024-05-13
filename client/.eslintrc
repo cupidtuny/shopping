@@ -102,7 +102,7 @@
       {
         "singleQuote": true,
         "endOfLine": "auto",
-        "tabWidth": 4,
+        "tabWidth": 6,
       },
     ],
     "jsx-a11y/href-no-hash": "off",

@@ -1,6 +1,8 @@
-const user = require('./user.route');
-const dessert = require('./dessert.route');
+import user from './user.route.js';
+import dessert from './dessert.route.js';
 
-module.exports = (app) => {
-  user(app), dessert(app);
+const Router = (app) => {
+    user(app), dessert(app);
 };
+
+export default Router;
